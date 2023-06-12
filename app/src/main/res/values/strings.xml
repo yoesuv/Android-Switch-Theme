@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Switch Theme</string>
+    <string name="information_theme">This application use Light/Dark theme</string>
+    <string name="exit">Exit</string>
 </resources>
