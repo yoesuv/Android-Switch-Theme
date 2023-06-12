@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.SwitchTheme" parent="Base.Theme.SwitchTheme" />
+
+    <style name="MySwitch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="thumbTint">@drawable/selector_switch</item>
+        <item name="trackTint">@drawable/selector_track_switch</item>
+    </style>
+
 </resources>
