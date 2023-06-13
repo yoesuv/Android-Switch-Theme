@@ -82,6 +82,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnExit"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +92,8 @@
             android:layout_marginBottom="@dimen/default_padding"
             android:text="@string/exit"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:cornerRadius="@dimen/corner_radius"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
