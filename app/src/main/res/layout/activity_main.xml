@@ -69,6 +69,7 @@
                     android:textColor="@color/text_color" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchTheme"
                     style="@style/MySwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
