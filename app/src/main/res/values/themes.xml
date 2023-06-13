@@ -12,4 +12,17 @@
         <item name="trackTint">@drawable/selector_track_switch</item>
     </style>
 
+    <!-- Begin style Dialog -->
+    <style name="DialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.Rounded</item>
+    </style>
+    <style name="MaterialAlertDialog.Rounded" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.MaterialAlertDialog.Rounded</item>
+    </style>
+
+    <style name="ShapeAppearance.MaterialAlertDialog.Rounded" parent="">
+        <item name="cornerSize">@dimen/corner_radius</item>
+    </style>
+    <!-- End style Dialog -->
+
 </resources>

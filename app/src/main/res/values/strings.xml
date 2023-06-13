@@ -3,4 +3,5 @@
     <string name="information_theme">This application use Light/Dark theme</string>
     <string name="exit">Exit</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="exit_message">Exit from Application?</string>
 </resources>
