@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Switch Theme"
-include ':app'
+include(":app")
