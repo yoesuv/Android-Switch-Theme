@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yoesuv.switchtheme.databinding.ActivityMainBinding
 
-const val isDark = "isDarkTheme"
+const val IS_DARK = "isDarkTheme"
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setupToolbar()
         setupSwitch()
@@ -31,17 +31,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSwitch() {
-        val isDarkEnable = MyApp.prefHelper?.getBoolean(isDark) ?: false
+        val isDarkEnable = MyApp.prefHelper?.getBoolean(IS_DARK) ?: false
         binding.switchTheme.isChecked = isDarkEnable
         val theme = if (isDarkEnable) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
         AppCompatDelegate.setDefaultNightMode(theme)
         binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                MyApp.prefHelper?.setBoolean(isDark, true)
+                MyApp.prefHelper?.setBoolean(IS_DARK, true)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                MyApp.prefHelper?.setBoolean(isDark, false)
+                MyApp.prefHelper?.setBoolean(IS_DARK, false)
             }
         }
     }
