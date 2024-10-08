@@ -1,8 +1,9 @@
 package com.yoesuv.switchtheme
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,10 +20,29 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this
 
         setupToolbar()
         setupSwitch()
         setupButton()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        val currentNightMode = newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        when (currentNightMode) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+                binding.switchTheme.isChecked = false
+                setupDarkMode(false)
+                recreate()
+            }
+
+            Configuration.UI_MODE_NIGHT_YES -> {
+                binding.switchTheme.isChecked = true
+                setupDarkMode(true)
+                recreate()
+            }
+        }
     }
 
     private fun setupToolbar() {
@@ -33,16 +53,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupSwitch() {
         val isDarkEnable = MyApp.prefHelper?.getBoolean(IS_DARK) ?: false
         binding.switchTheme.isChecked = isDarkEnable
-        val theme = if (isDarkEnable) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        AppCompatDelegate.setDefaultNightMode(theme)
+        setupDarkMode(isDarkEnable)
         binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                MyApp.prefHelper?.setBoolean(IS_DARK, true)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                MyApp.prefHelper?.setBoolean(IS_DARK, false)
-            }
+            setupDarkMode(isChecked)
         }
     }
 
@@ -61,6 +74,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnExit.setOnClickListener {
             dialogExit?.show()
         }
+    }
+
+    private fun setupDarkMode(isDarkMode: Boolean) {
+        val night =
+            if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        AppCompatDelegate.setDefaultNightMode(night)
+        MyApp.prefHelper?.setBoolean(IS_DARK, isDarkMode)
     }
 
 }
