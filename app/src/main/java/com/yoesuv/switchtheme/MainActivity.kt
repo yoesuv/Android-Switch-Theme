@@ -2,12 +2,15 @@ package com.yoesuv.switchtheme
 
 import android.content.res.Configuration
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yoesuv.switchtheme.databinding.ActivityMainBinding
+import com.yoesuv.switchtheme.utils.insetsPadding
 
 const val IS_DARK = "isDarkTheme"
 
@@ -19,12 +22,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        enableEdgeToEdge()
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
 
         setupToolbar()
         setupSwitch()
         setupButton()
+        setupEdgeToEdge()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -81,6 +88,11 @@ class MainActivity : AppCompatActivity() {
             if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
         AppCompatDelegate.setDefaultNightMode(night)
         MyApp.prefHelper?.setBoolean(IS_DARK, isDarkMode)
+    }
+
+    private fun setupEdgeToEdge() {
+        val color = ContextCompat.getColor(this, R.color.primary)
+        insetsPadding(binding.corMain, top = true, color = color)
     }
 
 }
